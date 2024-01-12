@@ -16,8 +16,28 @@ const [toDos, setToDos] = useState([])
       
     ]
   })
+
+  setNewItem("");
+
 }
-  
+  function toggleTodo(id, completed) {
+    setToDos((currentToDos) => {
+      return currentToDos.map(todo =>{
+        if(todo.id === id) {
+          // todo.completed = completed
+          return {...todo, completed}
+        }
+
+        return todo;
+        })
+      })
+  }
+
+  function deleteTodo(id) {
+  setToDos(currentTodos => {
+    return currentToDos.filter(todo.item)
+  })
+  }
   //   setToDos((currentToDos) => {
   //     return[
   //     ...toDos,
@@ -40,29 +60,21 @@ const [toDos, setToDos] = useState([])
         
         <h1 className="header">Todo List</h1>
         <ul className="list">
-          <li>
+          {toDos.map(todo => {
+          return (
+          <li key ={todo.id}> 
             <label>
-              <input type="checkbox"></input>
-              Item 1
-            </label>
-            <button className="btn btn-danger">Delete</button>
+            <input type="checkbox" checked={todo.completed} 
+            onChange={e => toggleTodo(todo.id, e.target.checked)}/>
+            {todo.title}
+          </label>
+          <button className="btn btn-danger">Delete</button>
           </li>
-          <li>
-            <label>
-              <input type="checkbox"></input>
-              Item 2
-            </label>
-            <button className="btn btn-danger">Delete</button>
-          </li>
-          <li>
-            <label>
-              <input type="checkbox"></input>
-              Item 3
-            </label>
-            <button className="btn btn-danger">Delete</button>
-          </li>
+          )
+          })}
         </ul>
       
     </>
+
   );
 }
