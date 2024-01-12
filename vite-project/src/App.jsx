@@ -35,8 +35,8 @@ const [toDos, setToDos] = useState([])
 
   function deleteTodo(id) {
   setToDos(currentTodos => {
-    return currentToDos.filter(todo.item)
-  })
+    return currentToDos.filter(todo.id !=== id);
+    })
   }
   //   setToDos((currentToDos) => {
   //     return[
@@ -60,6 +60,7 @@ const [toDos, setToDos] = useState([])
         
         <h1 className="header">Todo List</h1>
         <ul className="list">
+          {toDos.length === 0 && "No todolist" }
           {toDos.map(todo => {
           return (
           <li key ={todo.id}> 
@@ -68,7 +69,7 @@ const [toDos, setToDos] = useState([])
             onChange={e => toggleTodo(todo.id, e.target.checked)}/>
             {todo.title}
           </label>
-          <button className="btn btn-danger">Delete</button>
+          <button onClick={() => deleteTodo(todo.id)} className="btn btn-danger">Delete</button>
           </li>
           )
           })}
